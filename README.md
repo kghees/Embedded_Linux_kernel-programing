@@ -89,4 +89,18 @@ make
 sudo insmod geonhee.ko
 sudo rmmod geonhee
 ```
-![image](https://github.com/kghees/Embedded_Linux_kernel-programing/assets/92205960/92a348a9-c786-4540-aaed-d375c4c24c22)
+![image](https://github.com/kghees/Embedded_Linux_kernel-programing/assets/92205960/92a348a9-c786-4540-aaed-d375c4c24c22)  
+
+#### Linux 장치 제어 방법  
+App에서 H/W를 제어하려면, H/W에 대응하는 Device File에 System Call을 보내야한다.  
+User Space에 있는 app은 Kernel Space의 접근이 불가하다.  
+app은 Device Driver에 연결된 Device File에 syscall을 보내 장치를 제어할 수 있다.  
+![image](https://github.com/kghees/Embedded_Linux_kernel-programing/assets/92205960/e61a073c-1f3c-44a4-8482-87ea7b6edfda)  
+
+### Device File 생성  
+sudo mknod [파일명][파일종류][majorN][minorN]  
+ex) sudo mknod /dev/deviceFile c 100 0   
+=> deviceFile이라는 이름의 캐릭터 디바이스 파일 주번호 100, 부번호 0 생성  
+(c:캐릭터 디바이스 파일, b:block 디바이스 파일)  
+![image](https://github.com/kghees/Embedded_Linux_kernel-programing/assets/92205960/c0c35388-3cde-4b73-ac51-662648b117fd)
+
