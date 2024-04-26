@@ -80,3 +80,13 @@
 3. netdev : 네트워크 디바이스 드라이버
    - socket을 열고 ioctl이라는 System call로 장치를 제어
 
+## 디바이스 드라이버 실습  
+- insmod : [영어이름] 출력
+- rmmod : [SSAFY embedded] 출력
+```
+Build Code
+make
+sudo insmod geonhee.ko
+sudo rmmod geonhee
+```
+![image](https://github.com/kghees/Embedded_Linux_kernel-programing/assets/92205960/92a348a9-c786-4540-aaed-d375c4c24c22)
