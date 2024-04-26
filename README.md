@@ -83,8 +83,8 @@
 ## 디바이스 드라이버 실습  
 - insmod : [영어이름] 출력
 - rmmod : [SSAFY embedded] 출력
+**Build Code**
 ```
-Build Code
 make
 sudo insmod geonhee.ko
 sudo rmmod geonhee
