@@ -69,6 +69,7 @@
 - App은 Kernel안에서 동작 중인 디바이스 드라이버에 직접 접근이 불가하다!
   - 그래서 Device Driver와 연결된 디바이스 파일을 만들고 App이 장치 파일에 신호를 보내서
     Device Driver가 H/W를 제어하도록 한다.
+    
 **Device Driver의 종류**
 1. chrdev : 캐릭터 디바이스 드라이버
    - Byte 단위로 값 전달
