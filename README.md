@@ -20,6 +20,7 @@
     - GRUB2
     - Grand Unified Bootloader
     - GNU 프로젝트에서 개발한 부트로더
+  
 **Bootloader를 사용하는 이유**
 운영체제의 부팅에 있어서 가장 중요한 것중에 하나로, 운영체제가 시동되기 전에 미리 실행되어
 커널이 올바르게 사용되기 위해 필요한 모든 작업을 마무리 하고 최종적으로 운영체제를 시동시키기
@@ -59,12 +60,15 @@
 ### Device Driver  
 - 특정 하드웨어나 장치의 입출력을 제어하기 위해 커널의 일부분으로 동작하는 컴퓨터 소프트웨어
 - Software Interface를 통해 Application이 H/W Spec을 이해하지 않아도 되는 장점
+
 **필요성**
   - 커널에서 동작할 수 있는 커널 모듈 형식의 디바이스 드라이버를 개발 동작 중인 커널에 적재(insmod)하여 테스트를 한다.
   - 테스트 마다 배번 커널을 빌드한 필요가 없어서 개발 시간이 단축된다.
+
 **커널 모듈(Kernel Module)** 이란
 - 커널 내부에 삽입될 수 있는 Build된 Binary 파일
   - .ko 확장자, insmod/rmmod를 사용해 커널에 삽입/제거 할 수 있다.
+
 **디바이스 파일의 필요성**
 - App은 Kernel안에서 동작 중인 디바이스 드라이버에 직접 접근이 불가하다!
   - 그래서 Device Driver와 연결된 디바이스 파일을 만들고 App이 장치 파일에 신호를 보내서
@@ -102,5 +106,14 @@ sudo mknod [파일명][파일종류][majorN][minorN]
 ex) sudo mknod /dev/deviceFile c 100 0   
 => deviceFile이라는 이름의 캐릭터 디바이스 파일 주번호 100, 부번호 0 생성  
 (c:캐릭터 디바이스 파일, b:block 디바이스 파일)  
-![image](https://github.com/kghees/Embedded_Linux_kernel-programing/assets/92205960/c0c35388-3cde-4b73-ac51-662648b117fd)
+![image](https://github.com/kghees/Embedded_Linux_kernel-programing/assets/92205960/c0c35388-3cde-4b73-ac51-662648b117fd)  
+- mknod로 /dev/deviceFile을 생성하면, 재부팅 할 때마다 매번 다시 장치 파일을 생성해야 한다.
 
+  
+**cat 명령어**  
+- cat명령어는 특정 파일 내용을 읽어서 출력하라는 명령어이다.
+- 내부적으로 특정 파일에 open(), close() system call을 보내게 된다.
+  ex) sudo cat /dev/deviceFile
+#### Linux 장치 제어 방법
+  Device File 열고 **open**, 내용을 읽고 **read**, 원하는 정보를 작성 **write**후, 닫는다. **close**  
+  DeviceFile를 Device Node라 하며, app 개발자는 syscall을 이용해 Device File에 접근해, 장치를   제어할 수 있다.
